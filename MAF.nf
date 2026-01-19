@@ -34,7 +34,7 @@ workflow {
                             def fasta = row[1]
                             tuple(sample_id, fasta)
                         }
-                        .view { row -> "ID=${row.sample_id} FILE=${row.fasta}" }
+                        .view { it }
 
     run_fantasia(ch_samples)
 }
