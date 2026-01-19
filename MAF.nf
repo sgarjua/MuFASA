@@ -1,26 +1,39 @@
-// Default parameter input
 params.input = "./test/test.tsv"
+params.fantasia_dir = "/00_software/FANTASIA-Lite"
+params.outdir = "results"
 
-// split process
-process split {
-    
+process run_fantasia {
+
+    publishDir "${params.outdir}/${sample_id}", mode: 'copy'
+
     input:
-    
+        tuple val(sample_id), path(sample_file)
+
     output:
+        path "*"
 
     script:
     """
-    
+    cd ${params.fantasia_dir}
+
+    python3 fantasia_pipeline.py \
+        --serial-models \
+        --embed-models prot_t5 \
+        ${sample_file}
     """
 }
 
 
-
 // Workflow block
 workflow {
-    ch_samples = channel.fromPath(params.input)
+
+    Channel
+        .fromPath(params.input)
+        .splitTsv(header: true)
         .map { row ->
-            return row
+            tuple(row.sample_id, file(row.fasta))
         }
-        .view()
+        .set { ch_samples }
+
+    run_fantasia(ch_samples)
 }
