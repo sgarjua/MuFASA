@@ -29,11 +29,12 @@ workflow {
 
     Channel
         .fromPath(params.input)
-        .splitTsv(header: true)
+        .splitCsv(header: true, sep: '\t')
         .map { row ->
             tuple(row.sample_id, file(row.fasta))
         }
         .set { ch_samples }
+        .view { row -> "ID=${row.sample_id} FILE=${row.fasta}" }
 
     run_fantasia(ch_samples)
 }
