@@ -29,8 +29,7 @@ workflow {
 
     ch_samples= Channel.fromPath(params.input)
                         .splitCsv(header: true)
-                        .map { row -> tuple(row.sample_id, file(row.file)) }
-                        .view(tuple)
+                        .map { row -> tuple(row.species, file(row.fasta)) }
 
     run_fantasia(ch_samples)
 }
