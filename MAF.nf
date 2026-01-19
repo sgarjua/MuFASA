@@ -21,7 +21,7 @@ process run_fantasia {
     python3 fantasia_pipeline.py \
         --serial-models \
         --embed-models prot_t5 \
-        ${fasta}
+        /inputs/${fasta}
     """
 }
 
