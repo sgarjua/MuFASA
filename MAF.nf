@@ -7,7 +7,7 @@ process run_fantasia {
     publishDir "${params.outdir}/${sample_id}", mode: 'copy'
 
     input:
-        tuple val(sample_id), path(sample_file)
+        tuple val(species), file(fasta)
 
     output:
         path "*"
@@ -19,7 +19,7 @@ process run_fantasia {
     python3 fantasia_pipeline.py \
         --serial-models \
         --embed-models prot_t5 \
-        ${sample_file}
+        ${fasta}
     """
 }
 
