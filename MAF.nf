@@ -5,7 +5,7 @@ params.outdir = "results"
 process cpy_fasta {
 
     input:
-        tuple val(species), path(fasta_path), val(fasta)
+        tuple val(species), path(fasta), val(fasta_path)
 
     output:
         tuple val(species), path("${params.fantasia_dir}/fasta_tmp/${fasta}")
