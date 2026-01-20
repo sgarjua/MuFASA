@@ -5,7 +5,7 @@ params.outdir = "results"
 process cpy_fasta {
 
     input:
-        tuple val(species), path(fasta)
+        tuple val(species), val(fasta)
 
     output:
         tuple val(species), path("fasta_tmp/*"), emit: fantasia_input
