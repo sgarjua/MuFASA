@@ -15,7 +15,7 @@ process run_fantasia {
 
     script:
     """
-    cp ${fasta.toAbsolutePath()} ${params.fantasia_dir}/inputs/${fasta.getName()}
+    cp $(realpath ${fasta}) ${params.fantasia_dir}/inputs/${fasta.getName()}
     cd ${params.fantasia_dir}
     python3 fantasia_pipeline.py --serial-models --embed-models prot_t5 /inputs/${fasta.getName()}
     """
