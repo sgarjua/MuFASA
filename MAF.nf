@@ -45,4 +45,5 @@ workflow {
                         .view()
 
     ch_fantasia_input = cpy_fasta(ch_samples)
+    run_fantasia(ch_fantasia_input)
 }
