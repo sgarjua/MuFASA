@@ -31,7 +31,7 @@ process run_fantasia {
     script:
     """
     cd ${params.fantasia_dir}
-    python3 fantasia_pipeline.py --serial-models --embed-models prot_t5 /fasta_tmp/${fasta.getName()}
+    python3 fantasia_pipeline.py --serial-models --embed-models prot_t5 ${params.fantasia_dir}/fasta_tmp/${fasta.getName()}
     """
 }
 
