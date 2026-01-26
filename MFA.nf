@@ -23,6 +23,17 @@ process run_diamond {
     """
 }
 
+workflow diamond_run {
+
+    take:
+        ch_input
+
+    main:
+        run_diamond(ch_input)
+
+    emit:
+        out = run_diamond.out
+}
 
 
 // Workflow block
@@ -44,7 +55,7 @@ workflow {
         tuple(species, fasta, params.dbtrembl)
     }
 
-    run_diamond(ch_diamond_sprot)
-    run_diamond(ch_diamond_trembl)
+    diamond_run(ch_diamond_sprot)
+    diamond_run(ch_diamond_trembl)
 
 }
