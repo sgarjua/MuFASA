@@ -19,6 +19,7 @@ process run_diamond {
 
     script:
     """
+    mkdir -p ${params.outdir}/${species}
     diamond blastp --query $fasta --db $db --outfmt 6 --max-target-seqs 1 --evalue 1e-20 --out ${params.outdir}/${species} --threads 24 --sensitive
     """
 }
