@@ -12,7 +12,7 @@ process run_diamond {
     publishDir "${params.outdir}/${species}", mode: 'copy'
 
     input:
-        tuple val(species), path(fasta), path(db), 
+        tuple val(species), path(fasta), path(db)
 
     output:
         path "*"
