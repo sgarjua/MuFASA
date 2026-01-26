@@ -2,7 +2,8 @@ params.input = "./test/test.csv"
 params.fantasia_dir = "$HOME/00_software/FantasiaLiteV0"
 params.outdir = "results"
 
-include { cpy_fasta, run_fantasia } from './modules/run_FANTASIA.nf'
+include { cpy_fasta } from './modules/run_FANTASIA.nf'
+include { run_fantasia } from './modules/run_FANTASIA.nf'
 
 process run_diamond {
 
