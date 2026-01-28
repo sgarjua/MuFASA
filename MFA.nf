@@ -34,7 +34,7 @@ process run_diamond {
         tuple val(species), path(fasta), path(db)
 
     output:
-        tuple val(species), path("${species}/${species}.${db.getName()}.o6.txt")
+        tuple val(species), path(fasta), path("${species}/${species}.${db.getName()}.o6.txt")
 
     script:
     """
@@ -107,6 +107,7 @@ workflow {
     ch_diamond_out = run_diamond(ch_diamond)
     grouped_ch = ch_diamond_out
                 .groupTuple(by: 0)
+
                 .view()
-    // write_yaml(grouped_ch)
+    write_yaml(grouped_ch)
 }
