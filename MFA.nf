@@ -106,7 +106,7 @@ workflow {
     ch_diamond = ch_samples2.combine(ch_dbs).view()
     ch_diamond_out = run_diamond(ch_diamond)
     grouped_ch = ch_diamond_out
-                .groupTuple(by: 0)
+                .groupTuple(by: 0, 1)
 
                 .view()
     write_yaml(grouped_ch)
