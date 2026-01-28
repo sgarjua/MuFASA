@@ -48,7 +48,7 @@ process write_yaml {
     publishDir "${params.outdir}/${species}", mode: 'copy'
 
     input:
-    tuple val(species), path(fasta), path("${params.outdir}/${species}.${db.getName()}.o6.txt")
+    tuple val(species), path(fasta), path(trembl_tsv), path(sprot_tsv)
 
     output:
     path "config.yaml"
@@ -68,7 +68,7 @@ process write_yaml {
     swissprot:
         weight: 653
         description_score_bit_score_weight: 2.717061
-        file: {sprot_tsv}
+        file: $sprot_tsv
         database: $params.UNIPROT_SPROT
         blacklist: $params.BLACKLIST
         filter: $params.FILTER_SPROT
@@ -77,7 +77,7 @@ process write_yaml {
     trembl:
         weight: 904
         description_score_bit_score_weight: 2.590211
-        file: {trembl_tsv}
+        file: $trembl_tsv
         database: $params.UNIPROT_TREMBL
         blacklist: $params.BLACKLIST
         filter: $params.FILTER_TREMBL
@@ -119,5 +119,5 @@ workflow {
                         )
                 }
                 .view()
-    //rite_yaml(grouped_ch)
+    write_yaml(grouped_ch)
 }
