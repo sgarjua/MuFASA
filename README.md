@@ -1,2 +1,2 @@
-# MFA-NF
-Multi-method Functional Annotation – Nextflow pipeline
+# MuFASA
+Multi-source Functional Annotation and Support Analysis
